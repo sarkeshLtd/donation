@@ -7,7 +7,6 @@ use \core\cls\db as db;
 class event extends module{
 	use \addon\plugin\payment\addons;
 	/*
-	 * clear php errors
 	 * @param array $e, form properties
 	 * @return array, form properties
 	 */
