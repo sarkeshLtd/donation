@@ -13,20 +13,7 @@ class module{
 	 * construct
 	 */
 	function __construct(){}
-	
-	//this function return back menus for use in admin area
-	public static function coreMenu(){
-		$menu = array();
-		$url = core\general::createUrl(['service','administrator','load','donation','listAll']);
-		array_push($menu,[$url, _('History')]);
-		$url = core\general::createUrl(['service','administrator','load','donation','settings']);
-		array_push($menu,[$url, _('Settings')]);
-		$ret = [];
-		array_push($ret, ['<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>' , _('donation')]);
-		array_push($ret,$menu);
-		return $ret;
-	}
-	
+
 	/*
 	 * show page for enter donation information
 	 * @return 2D array [title,content]
@@ -55,7 +42,7 @@ class module{
 	 */
     protected function moduleListDonate(){
         $orm = db\orm::singleton();
-        return $this->viewListDonate($orm->find('donation_history','state=?',[1]));
+        return $this->viewListDonate($orm->exec('SELECT * FROM donation_history WHERE state=? ORDER BY date DESC',[1],SELECT));
     }
 	
 }
